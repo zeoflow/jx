@@ -1,0 +1,4 @@
+include ':jx'
+include ':app'
+
+rootProject.name = 'jx'
