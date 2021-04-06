@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zeoflow.jx.annotation.processing;
+package javax.annotation.processing;
 
 import com.zeoflow.jx.lang.model.element.Element;
 import com.zeoflow.jx.tools.FileObject;
@@ -23,11 +23,6 @@ import com.zeoflow.jx.tools.JavaFileObject;
 import com.zeoflow.jx.tools.StandardLocation;
 
 import java.io.IOException;
-
-import javax.annotation.processing.FilerException;
-import javax.annotation.processing.Generated;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
 
 /**
  * This interface supports the creation of new files by an annotation
