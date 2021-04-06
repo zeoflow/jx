@@ -16,7 +16,7 @@
 
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.annotation.processing.Filer;
+import javax.annotation.processing.Filer;
 import com.zeoflow.jx.lang.model.element.Element;
 import com.zeoflow.jx.tools.JavaFileObject;
 import com.zeoflow.jx.tools.JavaFileObject.Kind;

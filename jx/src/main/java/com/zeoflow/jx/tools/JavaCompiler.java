@@ -16,7 +16,7 @@
 
 package com.zeoflow.jx.tools;
 
-import com.zeoflow.jx.annotation.processing.Processor;
+import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
 
 import java.io.Writer;

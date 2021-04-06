@@ -17,7 +17,7 @@
 package com.zeoflow.jx.lang.model.element;
 
 import javax.annotation.processing.ProcessingEnvironment;
-import com.zeoflow.jx.annotation.processing.Processor;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import com.zeoflow.jx.lang.model.util.Elements;
 

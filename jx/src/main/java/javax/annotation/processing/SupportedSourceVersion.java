@@ -16,8 +16,6 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.annotation.processing.Processor;
-
 import javax.lang.model.SourceVersion;
 
 import java.lang.annotation.Documented;

@@ -16,8 +16,6 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.annotation.processing.Processor;
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -27,7 +25,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * An annotation used to indicate what options an annotation processor
- * supports.  The {@link com.zeoflow.jx.annotation.processing.Processor#getSupportedOptions} method can
+ * supports.  The {@link Processor#getSupportedOptions} method can
  * construct its result from the value of this annotation, as done by
  * {@link AbstractProcessor#getSupportedOptions}.  Only {@linkplain
  * Processor#getSupportedOptions strings conforming to the

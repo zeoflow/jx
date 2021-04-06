@@ -16,8 +16,6 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.annotation.processing.Processor;
-
 /**
  * A suggested {@linkplain Processor#getCompletions <em>completion</em>} for an
  * annotation.  A completion is text meant to be inserted into a

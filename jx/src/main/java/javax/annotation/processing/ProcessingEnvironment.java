@@ -18,7 +18,6 @@ package javax.annotation.processing;
 
 import javax.lang.model.SourceVersion;
 
-import com.zeoflow.jx.annotation.processing.Processor;
 import com.zeoflow.jx.lang.model.util.Elements;
 import com.zeoflow.jx.lang.model.util.Types;
 
@@ -27,7 +26,7 @@ import java.util.Map;
 
 /**
  * An annotation processing tool framework will {@linkplain
- * com.zeoflow.jx.annotation.processing.Processor#init provide an annotation processor with an object
+ * Processor#init provide an annotation processor with an object
  * implementing this interface} so the processor can use facilities
  * provided by the framework to write new files, report error
  * messages, and find other utilities.
