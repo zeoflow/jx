@@ -18,7 +18,6 @@ package javax.annotation.processing;
 
 import javax.lang.model.SourceVersion;
 
-import com.zeoflow.jx.annotation.processing.Processor;
 import com.zeoflow.jx.lang.model.element.AnnotationMirror;
 import com.zeoflow.jx.lang.model.element.Element;
 import com.zeoflow.jx.lang.model.element.ExecutableElement;
@@ -45,7 +44,7 @@ import java.util.Set;
  *
  * <p>Subclasses are free to override the implementation and
  * specification of any of the methods in this class as long as the
- * general {@link com.zeoflow.jx.annotation.processing.Processor Processor}
+ * general {@link Processor Processor}
  * contract for that method is obeyed.
  *
  * @author Joseph D. Darcy

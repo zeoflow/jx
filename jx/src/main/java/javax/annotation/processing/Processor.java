@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zeoflow.jx.annotation.processing;
+package javax.annotation.processing;
 
 import com.zeoflow.jx.lang.model.AnnotatedConstruct;
 
