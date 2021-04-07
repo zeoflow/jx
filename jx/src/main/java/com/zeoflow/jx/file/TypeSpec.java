@@ -17,13 +17,13 @@
 package com.zeoflow.jx.file;
 
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.Modifier;
-import com.zeoflow.jx.lang.model.element.TypeElement;
-import com.zeoflow.jx.lang.model.type.DeclaredType;
-import com.zeoflow.jx.lang.model.type.NoType;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
-import com.zeoflow.jx.lang.model.util.ElementFilter;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.NoType;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.ElementFilter;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -458,6 +458,7 @@ public final class TypeSpec
 
         public final Map<String, TypeSpec> enumConstants = new LinkedHashMap<>();
         public final List<AnnotationSpec> annotations = new ArrayList<>();
+        public final List<String> imports = new ArrayList<>();
         public final List<Modifier> modifiers = new ArrayList<>();
         public final List<TypeVariableName> typeVariables = new ArrayList<>();
         public final List<TypeName> superinterfaces = new ArrayList<>();
@@ -502,6 +503,12 @@ public final class TypeSpec
             {
                 this.annotations.add(annotationSpec);
             }
+            return this;
+        }
+
+        public Builder addImport(ClassName importClass)
+        {
+            this.imports.add(importClass.canonicalName);
             return this;
         }
 

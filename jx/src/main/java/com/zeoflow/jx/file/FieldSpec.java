@@ -17,7 +17,7 @@
 package com.zeoflow.jx.file;
 
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.Modifier;
+import javax.lang.model.element.Modifier;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

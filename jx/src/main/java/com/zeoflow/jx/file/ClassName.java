@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Google, Inc.
+ * Copyright (C) 2021 ZeoFlow SRL
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.PackageElement;
-import com.zeoflow.jx.lang.model.element.TypeElement;
-import com.zeoflow.jx.lang.model.util.SimpleElementVisitor8;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.SimpleElementVisitor8;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public final class ClassName extends TypeName implements Comparable<ClassName>
      * This class name, like "Entry" for java.util.Map.Entry.
      */
     final String simpleName;
+
     /**
      * The full class name like "java.util.Map.Entry".
      */
@@ -273,6 +275,24 @@ public final class ClassName extends TypeName implements Comparable<ClassName>
     public String simpleName()
     {
         return simpleName;
+    }
+    /**
+     * Returns the simple name of this class, like {@code "Map"} for {Map.class}.
+     */
+    public String className()
+    {
+        return packageName.substring(packageName.lastIndexOf(".") + 1);
+    }
+    /**
+     * Returns the simple name of this class, like {@code "Map"} for {Map.class}.
+     */
+    public String getPackage()
+    {
+        return packageName.substring(0, packageName.lastIndexOf("."));
+    }
+    public String classPackage()
+    {
+        return getPackage() + "." + className();
     }
     /**
      * Returns the full class name of this class.

@@ -17,10 +17,10 @@
 package com.zeoflow.jx.file;
 
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.ElementKind;
-import com.zeoflow.jx.lang.model.element.ExecutableElement;
-import com.zeoflow.jx.lang.model.element.Modifier;
-import com.zeoflow.jx.lang.model.element.VariableElement;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.VariableElement;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2021 ZeoFlow SRL
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,11 +17,11 @@
 package javax.annotation.processing;
 
 import javax.lang.model.SourceVersion;
-
-import com.zeoflow.jx.lang.model.element.AnnotationMirror;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.ExecutableElement;
-import com.zeoflow.jx.lang.model.element.TypeElement;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -105,7 +105,11 @@ public abstract class AbstractProcessor implements Processor
         SupportedAnnotationTypes sat = this.getClass().getAnnotation(SupportedAnnotationTypes.class);
         if (sat == null)
         {
-            isInitialized();
+            if (isInitialized())
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING,
+                        "No SupportedAnnotationTypes annotation " +
+                                "found on " + this.getClass().getName() +
+                                ", returning an empty set.");
             return Collections.emptySet();
         } else
             return arrayToSet(sat.value());
@@ -125,7 +129,11 @@ public abstract class AbstractProcessor implements Processor
         if (ssv == null)
         {
             sv = SourceVersion.RELEASE_6;
-            isInitialized();
+            if (isInitialized())
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING,
+                        "No SupportedSourceVersion annotation " +
+                                "found on " + this.getClass().getName() +
+                                ", returning " + sv + ".");
         } else
             sv = ssv.value();
         return sv;

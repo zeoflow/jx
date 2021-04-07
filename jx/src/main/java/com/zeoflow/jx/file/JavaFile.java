@@ -17,10 +17,10 @@
 package com.zeoflow.jx.file;
 
 import javax.annotation.processing.Filer;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.tools.JavaFileObject;
-import com.zeoflow.jx.tools.JavaFileObject.Kind;
-import com.zeoflow.jx.tools.SimpleJavaFileObject;
+import javax.lang.model.element.Element;
+import javax.tools.JavaFileObject;
+import javax.tools.JavaFileObject.Kind;
+import javax.tools.SimpleJavaFileObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -34,6 +34,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,7 @@ public final class JavaFile
     public final TypeSpec typeSpec;
     public final boolean skipJavaLangImports;
     private final Set<String> staticImports;
+    private final Set<String> imports;
     private final Set<String> alwaysQualify;
     private final String indent;
 
@@ -84,6 +86,7 @@ public final class JavaFile
         this.typeSpec = builder.typeSpec;
         this.skipJavaLangImports = builder.skipJavaLangImports;
         this.staticImports = Util.immutableSet(builder.staticImports);
+        this.imports = Util.immutableSet(builder.imports);
         this.indent = builder.indent;
 
         Set<String> alwaysQualifiedNames = new LinkedHashSet<>();
@@ -197,8 +200,7 @@ public final class JavaFile
                 : packageName + "." + typeSpec.name;
         List<Element> originatingElements = typeSpec.originatingElements;
         JavaFileObject filerSourceFile = filer.createSourceFile(fileName,
-                originatingElements.toArray(new Element[originatingElements.size()])
-        );
+                originatingElements.toArray(new Element[originatingElements.size()]));
         try (Writer writer = filerSourceFile.openWriter())
         {
             writeTo(writer);
@@ -325,6 +327,7 @@ public final class JavaFile
     {
 
         public final Set<String> staticImports = new TreeSet<>();
+        public final Set<String> imports = new TreeSet<>();
         private final String packageName;
         private final TypeSpec typeSpec;
         private final CodeBlock.Builder fileComment = CodeBlock.builder();
@@ -363,6 +366,13 @@ public final class JavaFile
                 checkArgument(name != null, "null entry in names array: %s", Arrays.toString(names));
                 staticImports.add(className.canonicalName + "." + name);
             }
+            return this;
+        }
+
+        public Builder addImport(ClassName className)
+        {
+            checkArgument(className != null, "className == null");
+            imports.add(className.canonicalName);
             return this;
         }
 

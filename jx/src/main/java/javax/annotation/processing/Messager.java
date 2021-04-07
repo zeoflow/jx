@@ -16,10 +16,10 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.lang.model.element.AnnotationMirror;
-import com.zeoflow.jx.lang.model.element.AnnotationValue;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.tools.Diagnostic;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.Element;
+import javax.tools.Diagnostic;
 
 /**
  * A {@code Messager} provides the way for an annotation processor to

@@ -16,8 +16,8 @@
 
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.type.ArrayType;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.ArrayType;
 
 import java.io.IOException;
 import java.lang.reflect.GenericArrayType;

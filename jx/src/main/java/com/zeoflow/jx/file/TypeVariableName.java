@@ -16,9 +16,9 @@
 
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
-import com.zeoflow.jx.lang.model.type.TypeVariable;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.TypeVariable;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

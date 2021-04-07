@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2021 ZeoFlow SRL
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,26 +16,16 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.lang.model.AnnotatedConstruct;
-
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Completion;
-import javax.annotation.processing.Completions;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.AnnotationMirror;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.ExecutableElement;
-import com.zeoflow.jx.lang.model.element.TypeElement;
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.util.Elements;
-import com.zeoflow.jx.tools.JavaCompiler;
-import com.zeoflow.jx.tools.StandardLocation;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.util.Elements;
+import javax.tools.JavaCompiler;
+import javax.tools.StandardLocation;
 
 import java.util.Set;
 

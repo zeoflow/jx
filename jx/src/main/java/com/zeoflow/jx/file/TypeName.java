@@ -16,17 +16,17 @@
 
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.lang.model.element.Modifier;
-import com.zeoflow.jx.lang.model.element.TypeElement;
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.type.ArrayType;
-import com.zeoflow.jx.lang.model.type.DeclaredType;
-import com.zeoflow.jx.lang.model.type.ErrorType;
-import com.zeoflow.jx.lang.model.type.NoType;
-import com.zeoflow.jx.lang.model.type.PrimitiveType;
-import com.zeoflow.jx.lang.model.type.TypeKind;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
-import com.zeoflow.jx.lang.model.util.SimpleTypeVisitor8;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.ArrayType;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.ErrorType;
+import javax.lang.model.type.NoType;
+import javax.lang.model.type.PrimitiveType;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.SimpleTypeVisitor8;
 
 import java.io.IOException;
 import java.lang.reflect.GenericArrayType;
@@ -193,13 +193,13 @@ public class TypeName
             }
 
             @Override
-            public TypeName visitTypeVariable(com.zeoflow.jx.lang.model.type.TypeVariable t, Void p)
+            public TypeName visitTypeVariable(javax.lang.model.type.TypeVariable t, Void p)
             {
                 return TypeVariableName.get(t, typeVariables);
             }
 
             @Override
-            public TypeName visitWildcard(com.zeoflow.jx.lang.model.type.WildcardType t, Void p)
+            public TypeName visitWildcard(javax.lang.model.type.WildcardType t, Void p)
             {
                 return WildcardTypeName.get(t, typeVariables);
             }
