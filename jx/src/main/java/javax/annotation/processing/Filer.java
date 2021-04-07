@@ -16,11 +16,11 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.tools.FileObject;
-import com.zeoflow.jx.tools.JavaFileManager;
-import com.zeoflow.jx.tools.JavaFileObject;
-import com.zeoflow.jx.tools.StandardLocation;
+import javax.lang.model.element.Element;
+import javax.tools.FileObject;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardLocation;
 
 import java.io.IOException;
 

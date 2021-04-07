@@ -16,8 +16,8 @@
 
 package javax.annotation.processing;
 
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.TypeElement;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;

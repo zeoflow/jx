@@ -17,9 +17,8 @@
 package javax.annotation.processing;
 
 import javax.lang.model.SourceVersion;
-
-import com.zeoflow.jx.lang.model.util.Elements;
-import com.zeoflow.jx.lang.model.util.Types;
+import javax.lang.model.util.Elements;
+import javax.lang.model.util.Types;
 
 import java.util.Locale;
 import java.util.Map;

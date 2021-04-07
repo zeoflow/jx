@@ -17,15 +17,15 @@
 package com.zeoflow.jx.file;
 
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.Element;
-import com.zeoflow.jx.lang.model.element.ExecutableElement;
-import com.zeoflow.jx.lang.model.element.Modifier;
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.type.DeclaredType;
-import com.zeoflow.jx.lang.model.type.ExecutableType;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
-import com.zeoflow.jx.lang.model.type.TypeVariable;
-import com.zeoflow.jx.lang.model.util.Types;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.ExecutableType;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.type.TypeVariable;
+import javax.lang.model.util.Types;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

@@ -16,8 +16,8 @@
 
 package com.zeoflow.jx.file;
 
-import com.zeoflow.jx.lang.model.element.TypeParameterElement;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
+import javax.lang.model.element.TypeParameterElement;
+import javax.lang.model.type.TypeMirror;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -85,12 +85,12 @@ public final class WildcardTypeName extends TypeName
     {
         return supertypeOf(TypeName.get(lowerBound));
     }
-    public static TypeName get(com.zeoflow.jx.lang.model.type.WildcardType mirror)
+    public static TypeName get(javax.lang.model.type.WildcardType mirror)
     {
         return get(mirror, new LinkedHashMap<>());
     }
     static TypeName get(
-            com.zeoflow.jx.lang.model.type.WildcardType mirror,
+            javax.lang.model.type.WildcardType mirror,
             Map<TypeParameterElement, TypeVariableName> typeVariables)
     {
         TypeMirror extendsBound = mirror.getExtendsBound();

@@ -17,13 +17,13 @@
 package com.zeoflow.jx.file;
 
 import javax.lang.model.SourceVersion;
-import com.zeoflow.jx.lang.model.element.AnnotationMirror;
-import com.zeoflow.jx.lang.model.element.AnnotationValue;
-import com.zeoflow.jx.lang.model.element.ExecutableElement;
-import com.zeoflow.jx.lang.model.element.TypeElement;
-import com.zeoflow.jx.lang.model.element.VariableElement;
-import com.zeoflow.jx.lang.model.type.TypeMirror;
-import com.zeoflow.jx.lang.model.util.SimpleAnnotationValueVisitor8;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
