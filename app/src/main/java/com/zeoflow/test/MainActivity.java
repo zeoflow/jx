@@ -18,9 +18,10 @@ package com.zeoflow.test;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.zeoflow.app.Activity;
+import com.zeoflow.jx.file.TypeName;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends Activity
 {
 
     @Override
@@ -28,6 +29,16 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String packageEx = "androidx.lifecycle.LiveData<java.util.List<java.lang.String>>";
+
+        log("" + TypeName.get(String.class).contains(String.class));
+        log("" + TypeName.get(packageEx).contains(String.class));
+        log("" + TypeName.get("androidx.lifecycle.Observer").contains(String.class));
+        log("" + TypeName.get(packageEx).disassemble().disassemble().disassemble().disassemble().toString());
+        log("" + TypeName.get(packageEx).assemble("java.lang.String").assemble(String.class).toString());
+        log("" + TypeName.get(String.class).assemble(Activity.class, true).toString());
+        log("" + TypeName.get(String.class).assemble(Activity.class, false).toString());
     }
 
 }
