@@ -36,6 +36,7 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,7 +111,43 @@ public class TypeName
         this.keyword = keyword;
         this.annotations = Util.immutableList(annotations);
     }
-
+    public static TypeName get(Class<?> className)
+    {
+        return get(className.getCanonicalName());
+    }
+    public static TypeName get(String raw)
+    {
+        if (!raw.contains("<"))
+        {
+            String classPackage = raw.substring(0, raw.lastIndexOf("."));
+            String className = raw.substring(raw.lastIndexOf(".") + 1);
+            return ClassName.get(classPackage, className);
+        }
+        List<String> packages = new ArrayList<>();
+        while(raw.contains("<"))
+        {
+            int firstIndex = raw.lastIndexOf("<") + 1;
+            int lastIndex = raw.indexOf(">");
+            packages.add(raw.substring(firstIndex, lastIndex));
+            raw = raw.replace(raw.substring(firstIndex - 1, lastIndex + 1), "");
+        }
+        packages.add(raw);
+        TypeName typeName = null;
+        for(String packageClass: packages)
+        {
+            ClassBean classData = new ClassBean(packageClass);
+            if(typeName == null)
+            {
+                typeName = get(packageClass);
+            } else {
+                typeName = ParameterizedTypeName.get(
+                        ClassName.get(classData.classPackage, classData.className),
+                        typeName
+                );
+            }
+        }
+        return typeName;
+    }
     // Package-private constructor to prevent third-party subclasses.
     TypeName(List<AnnotationSpec> annotations)
     {
@@ -264,6 +301,28 @@ public class TypeName
             throw new IllegalArgumentException("unexpected type: " + type);
         }
     }
+    public boolean contains(Class<?> className)
+    {
+        return contains(className.getCanonicalName());
+    }
+    public boolean contains(String raw)
+    {
+        String typeNameStr = toString();
+        if (!typeNameStr.contains("<"))
+        {
+            return typeNameStr.equals(raw);
+        }
+        List<String> packages = new ArrayList<>();
+        while(typeNameStr.contains("<"))
+        {
+            int firstIndex = typeNameStr.lastIndexOf("<") + 1;
+            int lastIndex = typeNameStr.indexOf(">");
+            packages.add(typeNameStr.substring(firstIndex, lastIndex));
+            typeNameStr = typeNameStr.replace(typeNameStr.substring(firstIndex - 1, lastIndex + 1), "");
+        }
+        packages.add(typeNameStr);
+        return packages.contains(raw);
+    }
     /**
      * Converts an array of types to a list of type names.
      */
@@ -381,6 +440,86 @@ public class TypeName
         if (this.equals(BOXED_FLOAT)) return FLOAT;
         if (this.equals(BOXED_DOUBLE)) return DOUBLE;
         throw new UnsupportedOperationException("cannot unbox " + this);
+    }
+    public TypeName disassemble()
+    {
+        String raw = toString();
+        if (!raw.contains("<"))
+        {
+            return this;
+        }
+        List<String> packages = new ArrayList<>();
+        while(raw.contains("<"))
+        {
+            int firstIndex = raw.lastIndexOf("<") + 1;
+            int lastIndex = raw.indexOf(">");
+            packages.add(raw.substring(firstIndex, lastIndex));
+            raw = raw.replace(raw.substring(firstIndex - 1, lastIndex + 1), "");
+        }
+        packages.add(raw);
+        TypeName typeName = null;
+        for(int index = 0; index<packages.size() - 1; index++)
+        {
+            String packageClass = packages.get(index);
+            ClassBean classData = new ClassBean(packageClass);
+            if(typeName == null)
+            {
+                typeName = get(packageClass);
+            } else {
+                typeName = ParameterizedTypeName.get(
+                        ClassName.get(classData.classPackage, classData.className),
+                        typeName
+                );
+            }
+        }
+        return typeName;
+    }
+    public TypeName assemble(Class<?> className)
+    {
+        return assemble(className, false);
+    }
+    public TypeName assemble(Class<?> className, boolean fromInside)
+    {
+        return assemble(className.getCanonicalName(), fromInside);
+    }
+    public TypeName assemble(String raw)
+    {
+        return assemble(raw, false);
+    }
+    public TypeName assemble(String raw, boolean fromInside)
+    {
+        String packageStr = toString();
+        List<String> packages = new ArrayList<>();
+        while(packageStr.contains("<"))
+        {
+            int firstIndex = packageStr.lastIndexOf("<") + 1;
+            int lastIndex = packageStr.indexOf(">");
+            packages.add(packageStr.substring(firstIndex, lastIndex));
+            packageStr = packageStr.replace(packageStr.substring(firstIndex - 1, lastIndex + 1), "");
+        }
+        packages.add(packageStr);
+        TypeName typeName = null;
+        if (fromInside)
+        {
+            packages.add(0, raw);
+        } else
+        {
+            packages.add(raw);
+        }
+        for(String packageClass: packages)
+        {
+            ClassBean classData = new ClassBean(packageClass);
+            if(typeName == null)
+            {
+                typeName = get(packageClass);
+            } else {
+                typeName = ParameterizedTypeName.get(
+                        ClassName.get(classData.classPackage, classData.className),
+                        typeName
+                );
+            }
+        }
+        return typeName;
     }
     @Override
     public final boolean equals(Object o)
