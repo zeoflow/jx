@@ -70,6 +70,7 @@ public final class TypeSpec
     public final List<Element> originatingElements;
     public final Set<String> alwaysQualifiedNames;
     final Set<String> nestedTypesSimpleNames;
+    public final String typeArguments;
 
     private TypeSpec(Builder builder)
     {
@@ -89,6 +90,7 @@ public final class TypeSpec
         this.methodSpecs = Util.immutableList(builder.methodSpecs);
         this.typeSpecs = Util.immutableList(builder.typeSpecs);
         this.alwaysQualifiedNames = Util.immutableSet(builder.alwaysQualifiedNames);
+        this.typeArguments = builder.typeArguments;
 
         nestedTypesSimpleNames = new HashSet<>(builder.typeSpecs.size());
         List<Element> originatingElementsMutable = new ArrayList<>();
@@ -127,6 +129,7 @@ public final class TypeSpec
         this.originatingElements = Collections.emptyList();
         this.nestedTypesSimpleNames = Collections.emptySet();
         this.alwaysQualifiedNames = Collections.emptySet();
+        this.typeArguments = "";
     }
     public static Builder classBuilder(String name)
     {
@@ -234,10 +237,10 @@ public final class TypeSpec
                 codeWriter.emitModifiers(modifiers, Util.union(implicitModifiers, kind.asMemberModifiers));
                 if (kind == Kind.ANNOTATION)
                 {
-                    codeWriter.emit("$L $L", "@interface", name);
+                    codeWriter.emit("$L $L", "@interface", name + typeArguments);
                 } else
                 {
-                    codeWriter.emit("$L $L", kind.name().toLowerCase(Locale.US), name);
+                    codeWriter.emit("$L $L", kind.name().toLowerCase(Locale.US), name + typeArguments);
                 }
                 codeWriter.emitTypeVariables(typeVariables);
 
@@ -469,6 +472,7 @@ public final class TypeSpec
         public final Set<String> alwaysQualifiedNames = new LinkedHashSet<>();
         private final Kind kind;
         private final String name;
+        private String typeArguments = "";
         private final CodeBlock anonymousTypeArguments;
         private final CodeBlock.Builder javadoc = CodeBlock.builder();
         private final CodeBlock.Builder staticBlock = CodeBlock.builder();
@@ -478,7 +482,18 @@ public final class TypeSpec
         private Builder(Kind kind, String name,
                         CodeBlock anonymousTypeArguments)
         {
-            checkArgument(name == null || SourceVersion.isName(name), "not a valid name: %s", name);
+            if (name == null)
+            {
+                throw new IllegalArgumentException(String.format("not a valid name: %s", name));
+            }
+            int start = name.indexOf("<");
+            int end = name.lastIndexOf(">") + 1;
+            if (start != -1)
+            {
+                this.typeArguments = name.substring(start, end);
+                name = name.substring(0, start) + name.substring(end);
+            }
+            checkArgument(SourceVersion.isName(name), "not a valid name: %s", name);
             this.kind = kind;
             this.name = name;
             this.anonymousTypeArguments = anonymousTypeArguments;

@@ -36,8 +36,8 @@ ext {
     buildToolsVersion = '30.0.1'
     minSdkVersion = 21
     targetSdkVersion = 30
-    versionCode = 4
-    versionName = "1.1.2"
+    versionCode = 5
+    versionName = "1.2.0"
 
     androidx = [
         appcompat: 'androidx.appcompat:appcompat:1.0.0',

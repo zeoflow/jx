@@ -19,7 +19,14 @@ package com.zeoflow.test;
 import android.os.Bundle;
 
 import com.zeoflow.app.Activity;
+import com.zeoflow.jx.file.JavaFile;
+import com.zeoflow.jx.file.MethodSpec;
 import com.zeoflow.jx.file.TypeName;
+import com.zeoflow.jx.file.TypeSpec;
+
+import java.io.IOException;
+
+import javax.lang.model.element.Modifier;
 
 public class MainActivity extends Activity
 {
@@ -39,6 +46,39 @@ public class MainActivity extends Activity
         log("" + TypeName.get(packageEx).assemble("java.lang.String").assemble(String.class).toString());
         log("" + TypeName.get(String.class).assemble(Activity.class, true).toString());
         log("" + TypeName.get(String.class).assemble(Activity.class, false).toString());
+
+        MethodSpec main = MethodSpec.methodBuilder("main")
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
+                .returns(void.class)
+                .addParameter(String[].class, "args")
+                .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
+                .addStatement("String<T> name")
+                .build();
+
+        MethodSpec main2 = MethodSpec.methodBuilder("getObs")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(void.class)
+                .addParameter(TypeName.get("com.Observable<T>"), "args")
+                .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
+                .addStatement("String<T> name")
+                .build();
+
+        TypeSpec helloWorld = TypeSpec.classBuilder("HelloWorld<Text, View>")
+                .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                .addMethod(main)
+                .addMethod(main2)
+                .build();
+
+        JavaFile javaFile = JavaFile.builder("com.example.helloworld", helloWorld)
+                .build();
+
+        try
+        {
+            javaFile.writeTo(System.out);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

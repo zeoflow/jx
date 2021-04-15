@@ -8,8 +8,15 @@ public class ClassBean
 
     public ClassBean(String classData)
     {
-        this.classPackage = classData.substring(0, classData.lastIndexOf("."));
-        this.className = classData.substring(classData.lastIndexOf(".") + 1);
+        int lastIndex = classData.lastIndexOf(".");
+        if (lastIndex != -1)
+        {
+            this.classPackage = classData.substring(0, lastIndex);
+            this.className = classData.substring(lastIndex + 1);
+        } else {
+            this.classPackage = classData;
+            this.className = classData;
+        }
     }
 
     public ClassBean(String classPackage, String className)
