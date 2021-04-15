@@ -16,12 +16,6 @@
 
 package com.zeoflow.jx.file;
 
-import javax.annotation.processing.Filer;
-import javax.lang.model.element.Element;
-import javax.tools.JavaFileObject;
-import javax.tools.JavaFileObject.Kind;
-import javax.tools.SimpleJavaFileObject;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -34,12 +28,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.annotation.processing.Filer;
+import javax.lang.model.element.Element;
+import javax.tools.JavaFileObject;
+import javax.tools.JavaFileObject.Kind;
+import javax.tools.SimpleJavaFileObject;
 
 import static com.zeoflow.jx.file.Util.checkArgument;
 import static com.zeoflow.jx.file.Util.checkNotNull;
@@ -120,8 +119,13 @@ public final class JavaFile
         Map<String, ClassName> suggestedImports = importsCollector.suggestedImports();
 
         // Second pass: write the code, taking advantage of the imports.
-        CodeWriter codeWriter
-                = new CodeWriter(out, indent, suggestedImports, staticImports, alwaysQualify);
+        CodeWriter codeWriter = new CodeWriter(
+                out,
+                indent,
+                suggestedImports,
+                staticImports,
+                alwaysQualify
+        );
         emit(codeWriter);
     }
     /**
