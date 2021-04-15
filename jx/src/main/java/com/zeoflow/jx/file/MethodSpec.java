@@ -197,6 +197,22 @@ public final class MethodSpec
             codeWriter.emit(" ");
         }
 
+//            TODO indexes of <>
+//        codeWriter.emit("<");
+//        for (Iterator<ParameterSpec> i = parameters.iterator(); i.hasNext(); )
+//        {
+//            ParameterSpec parameter = i.next();
+//            codeWriter.emit(parameter.name);
+//        }
+//        codeWriter.emit("> ");
+//            int start = name.indexOf("<");
+//            int end = name.lastIndexOf(">") + 1;
+//            if (start != -1)
+//            {
+//                this.typeArguments = name.substring(start, end);
+//                name = name.substring(0, start) + name.substring(end);
+//            }
+
         if (isConstructor())
         {
             codeWriter.emit("$L($Z", enclosingName);

@@ -58,7 +58,7 @@ public class MainActivity extends Activity
         MethodSpec main2 = MethodSpec.methodBuilder("getObs")
                 .addModifiers(Modifier.PUBLIC)
                 .returns(void.class)
-                .addParameter(String[].class, "args")
+                .addParameter(TypeName.get("com.Observable<T>"), "args")
                 .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
                 .addStatement("String<T> name")
                 .build();

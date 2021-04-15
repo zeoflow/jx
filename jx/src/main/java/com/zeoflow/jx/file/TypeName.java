@@ -119,9 +119,14 @@ public class TypeName
     {
         if (!raw.contains("<"))
         {
-            String classPackage = raw.substring(0, raw.lastIndexOf("."));
-            String className = raw.substring(raw.lastIndexOf(".") + 1);
-            return ClassName.get(classPackage, className);
+            int lastIndex = raw.lastIndexOf(".");
+            if(lastIndex != -1)
+            {
+                String classPackage = raw.substring(0, raw.lastIndexOf("."));
+                String className = raw.substring(raw.lastIndexOf(".") + 1);
+                return ClassName.get(classPackage, className);
+            }
+            return null;
         }
         List<String> packages = new ArrayList<>();
         while(raw.contains("<"))

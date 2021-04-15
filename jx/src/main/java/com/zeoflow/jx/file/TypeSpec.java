@@ -129,7 +129,7 @@ public final class TypeSpec
         this.originatingElements = Collections.emptyList();
         this.nestedTypesSimpleNames = Collections.emptySet();
         this.alwaysQualifiedNames = Collections.emptySet();
-        this.typeArguments = null;
+        this.typeArguments = "";
     }
     public static Builder classBuilder(String name)
     {
@@ -472,7 +472,7 @@ public final class TypeSpec
         public final Set<String> alwaysQualifiedNames = new LinkedHashSet<>();
         private final Kind kind;
         private final String name;
-        private String typeArguments;
+        private String typeArguments = "";
         private final CodeBlock anonymousTypeArguments;
         private final CodeBlock.Builder javadoc = CodeBlock.builder();
         private final CodeBlock.Builder staticBlock = CodeBlock.builder();
